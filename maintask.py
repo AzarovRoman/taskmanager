@@ -1,5 +1,3 @@
-import alembic
-
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.ext.declarative import declarative_base
@@ -37,7 +35,7 @@ class Notes(Base1):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     note = Column(String, nullable=False)
-    timer = Column(String) # надо будет исправить на DataTime
+    timer = Column(String)  # надо будет исправить на DataTime
     user_id = Column(ForeignKey('user.id'))
 
     user = relationship('User', back_populates='notes')
@@ -61,7 +59,7 @@ def registration():
     ses.commit()
 
 
-def visual(): # выводит всех юзеров
+def visual():  # выводит всех юзеров
     ses = sessionmaker(bind=engine)
     ses = ses()
 
