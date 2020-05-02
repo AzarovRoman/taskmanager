@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
 engine = create_engine('postgres:///data', echo=True)
-Base1 = declarative_base()
+
 
 
 class Base:
@@ -12,39 +12,6 @@ class Base:
     def __tablename__(cls):
         return cls.__name__.lower()
     id = Column(Integer, primary_key=True)
-
-
-class User(Base1):
-
-    __tablename__ = 'user'
-
-    id = Column(Integer, primary_key=True)
-    login = Column(String)
-    email = Column(String)
-    password = Column(String)
-
-
-metadata = MetaData
-Base1.metadata.create_all(engine)
-
-
-class Notes(Base1):
-
-    __tablename__ = 'notes'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    note = Column(String, nullable=False)
-    timer = Column(String)  # надо будет исправить на DataTime
-    user_id = Column(ForeignKey('user.id'))
-
-    user = relationship('User', back_populates='notes')
-
-
-User.notes = relationship('Notes', order_by=Notes.id, back_populates='user')
-
-
-Base1.metadata.create_all(engine)
 
 
 def registration():
