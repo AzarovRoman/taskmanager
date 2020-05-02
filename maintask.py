@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker, relationship
 engine = create_engine('postgres:///data', echo=True)
 
 
-
 class Base:
     @declared_attr
     def __tablename__(cls):
@@ -38,6 +37,7 @@ def visual():  # выводит всех юзеров
 def sign_in():
     ses = sessionmaker(bind=engine)
     ses = ses()
+
 
     login = input('введите логин: ')
     password = input('введите пароль: ')
@@ -101,5 +101,4 @@ def session():
 
 
 if __name__ == 'main':
-    registration()
-    session()
+    pass
